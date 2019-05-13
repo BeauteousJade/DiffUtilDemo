@@ -26,6 +26,15 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
     }
 
     @Override
+    public void onBindViewHolder(@NonNull RecyclerViewHolder holder, int position, @NonNull List<Object> payloads) {
+        if (!payloads.isEmpty() && payloads.contains("content")) {
+            holder.mTextView.setText(mDataList.get(position).getContent());
+        } else {
+            super.onBindViewHolder(holder, position, payloads);
+        }
+    }
+
+    @Override
     public void onBindViewHolder(@NonNull RecyclerAdapter.RecyclerViewHolder viewHolder, int i) {
         viewHolder.itemView.setBackgroundColor(mDataList.get(i).getColor());
         viewHolder.mTextView.setText(mDataList.get(i).getContent());

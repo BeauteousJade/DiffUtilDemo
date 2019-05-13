@@ -1,6 +1,7 @@
 package com.example.pby.diffutildemo;
 
 
+import android.support.annotation.Nullable;
 import android.support.v7.util.DiffUtil;
 
 import java.util.List;
@@ -34,5 +35,16 @@ public class RecyclerItemCallback extends DiffUtil.Callback {
     @Override
     public boolean areContentsTheSame(int i, int i1) {
         return Objects.equals(mOldDataList.get(i).getContent(), mNewDataList.get(i1).getContent());
+    }
+
+    @Nullable
+    @Override
+    public Object getChangePayload(int oldItemPosition, int newItemPosition) {
+        Bean oldBean = mOldDataList.get(oldItemPosition);
+        Bean newBean = mNewDataList.get(newItemPosition);
+        if (!Objects.equals(oldBean.getContent(), newBean.getContent())) {
+            return "content";
+        }
+        return null;
     }
 }
